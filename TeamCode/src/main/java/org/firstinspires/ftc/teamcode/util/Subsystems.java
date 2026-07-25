@@ -20,7 +20,9 @@ public final class Subsystems {
 
     public static final class Intake extends SubsystemBase {
 
-        private final DcMotor intake;
+        private final DcMotor intake1;
+        private final DcMotor intake2;
+
 
         private static final double INTAKE_POWER = 1.0;
         private static final double REVERSE_INTAKE_POWER = -0.5;
@@ -28,7 +30,8 @@ public final class Subsystems {
         private boolean reversed;
 
         public Intake(HardwareMap hardwareMap) {
-            intake = hardwareMap.get(DcMotor.class, "intake");
+            intake1 = hardwareMap.get(DcMotor.class, "intake1");
+            intake2 = hardwareMap.get(DcMotor.class, "intake2");
         }
 
         public void setReversed(boolean reversed) {
@@ -40,12 +43,14 @@ public final class Subsystems {
         }
 
         public void stop() {
-            intake.setPower(0.0);
+            intake1.setPower(0.0);
+            intake2.setPower(0.0);
         }
 
         @Override
         public void periodic() {
-            intake.setPower(reversed ? REVERSE_INTAKE_POWER : INTAKE_POWER);
+            intake1.setPower(reversed ? REVERSE_INTAKE_POWER : INTAKE_POWER);
+            intake2.setPower(reversed ? REVERSE_INTAKE_POWER : INTAKE_POWER * -1);
         }
     }
 
