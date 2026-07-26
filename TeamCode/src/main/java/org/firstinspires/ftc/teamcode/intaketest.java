@@ -10,8 +10,8 @@ public class intaketest extends LinearOpMode {
     private DcMotor intake1;
     private DcMotor intake2;
 
-    final double INTAKE_SPEED = 1;
-    final double REV_INTAKE_SPEED = -.5;
+    final double INTAKE_SPEED = -.5;
+    final double REV_INTAKE_SPEED = .25;
 
     @Override
     public void runOpMode() {
@@ -23,10 +23,13 @@ public class intaketest extends LinearOpMode {
         while (opModeIsActive()) {
             if (gamepad1.left_bumper) {
                 intake1.setPower(REV_INTAKE_SPEED);
-                intake2.setPower(REV_INTAKE_SPEED * -1);
-            } else {
+                intake2.setPower(REV_INTAKE_SPEED);
+            } else if (gamepad1.right_bumper) {
                 intake1.setPower(INTAKE_SPEED);
-                intake2.setPower(INTAKE_SPEED * -1);
+                intake2.setPower(INTAKE_SPEED);
+            } else {
+                intake1.setPower(0);
+                intake2.setPower(0);
             }
         }
 

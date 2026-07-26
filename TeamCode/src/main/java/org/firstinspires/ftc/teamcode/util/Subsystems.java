@@ -24,10 +24,11 @@ public final class Subsystems {
         private final DcMotor intake2;
 
 
-        private static final double INTAKE_POWER = 1.0;
-        private static final double REVERSE_INTAKE_POWER = -0.5;
+        private static final double INTAKE_POWER = -.5;
+        private static final double REVERSE_INTAKE_POWER = .25;
 
         private boolean reversed;
+        public boolean enabled;
 
         public Intake(HardwareMap hardwareMap) {
             intake1 = hardwareMap.get(DcMotor.class, "intake1");
@@ -49,8 +50,8 @@ public final class Subsystems {
 
         @Override
         public void periodic() {
-            intake1.setPower(reversed ? REVERSE_INTAKE_POWER : INTAKE_POWER);
-            intake2.setPower(reversed ? REVERSE_INTAKE_POWER : INTAKE_POWER * -1);
+            intake1.setPower(enabled ? reversed ? REVERSE_INTAKE_POWER : INTAKE_POWER : 0);
+            intake2.setPower(enabled ? reversed ? REVERSE_INTAKE_POWER : INTAKE_POWER : 0);
         }
     }
 

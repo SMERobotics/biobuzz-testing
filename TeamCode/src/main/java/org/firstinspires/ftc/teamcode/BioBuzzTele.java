@@ -30,6 +30,10 @@ public class BioBuzzTele extends CommandOpMode {
                 .whenPressed(() -> intake.setReversed(true))
                 .whenReleased(() -> intake.setReversed(false));
 
+        new GamepadButton(driverOp, GamepadKeys.Button.LEFT_BUMPER)
+                .whenPressed(() -> intake.enabled = true)
+                .whenReleased(() -> intake.enabled = false);
+
         new GamepadButton(driverOp, GamepadKeys.Button.START)
                 .whenPressed(drive.recalibratePinpoint);
     }
